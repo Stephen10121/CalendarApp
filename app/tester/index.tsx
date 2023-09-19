@@ -1,8 +1,18 @@
-import { useLocalSearchParams } from "expo-router";
+import { Redirect, useLocalSearchParams } from "expo-router";
+import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { tokenAtom, userDataAtom } from "../../store";
 
 export default function Tester() {
+  const [ token, setToken ] = useAtom(tokenAtom);
+	const [ userData, setUserData ] = useAtom(userDataAtom);
+
+  console.log({token, userData})
+
+  // if (!token && !userData) {
+	// 	return <Redirect href="/login" />;
+	// }
   const params = useLocalSearchParams();
 
   useEffect(() => {

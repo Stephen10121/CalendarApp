@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "CalendarApp",
-    "slug": "CalendarApp",
+    "name": "Task Giver",
+    "slug": "calendar-app",
+    "scheme": "com.gruzservices.calendarapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,6 +19,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.gruzservices.calendarapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -30,6 +32,14 @@
     "plugins": [
       "expo-router"
     ],
-    "scheme": "app"
+    "owner": "stephen10121",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "3bb9de14-47df-4341-8e8d-f41892c9b84c"
+      }
+    }
   }
 }

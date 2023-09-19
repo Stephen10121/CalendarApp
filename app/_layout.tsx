@@ -1,9 +1,9 @@
-import { SafeAreaView, StatusBar, View, StyleSheet } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import * as SplashScreen from 'expo-splash-screen';
 import { Provider as JotaiProvider } from "jotai";
 import React, { useCallback } from 'react';
-import { Link, Slot } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+import { Slot } from 'expo-router';
 import { useFonts } from 'expo-font';
 
 SplashScreen.preventAutoHideAsync();
@@ -22,16 +22,7 @@ export default function HomeLayout() {
 		<QueryClientProvider client={queryClient}>
 			<JotaiProvider>
 				<SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-					<View>
-						<StatusBar animated={true}  />
-						<Link style={styles.text} href="/">Home Page</Link>
-						<Link style={styles.text} href={{
-							pathname: "/tester",
-							params: {
-								tester: "bob"
-							}
-						}}>Tester Page</Link>
-					</View>
+					<StatusBar animated={true}  />
 					<Slot />
 				</SafeAreaView>
 			</JotaiProvider>
@@ -45,8 +36,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center',
-	},
-	text: {
-		fontFamily: "Poppins-SemiBold",
+		position: "relative"
 	}
 });
