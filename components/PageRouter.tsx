@@ -3,28 +3,28 @@ import { GetJobsByDatesResponse, JobType, getJobsByDates } from "../functions/ge
 import { FetchGroupsResponse, fetchGroups } from "../functions/fetchGroups";
 import { Dimensions, StyleSheet, View } from "react-native";
 import addJobMonth from "../functions/addJobMonth";
+import CalendarSection from "./CalendarSection";
 import HomeSection from "./HomeSection";
 import { useQuery } from "react-query";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import React from "react";
-import CalendarSection from "./CalendarSection";
 
 export type RemoveGroup = (groupId: string) => void;
 export type RemovePendingGroup = (pendingGroupId: string) => void;
 
 export default function LoggedIn() {
 	// Jotai Stores
-	const [ token, _setToken ] = useAtom(tokenAtom);
-	const [ userData, _setUserData ] = useAtom(userDataAtom);
-	const [ currentRoute, _setCurrentRoute ] = useAtom(currentRouteAtom);
-	const [ jobs, setJobs ] = useAtom(jobsAtom);
-	const [ _groups, setGroups ] = useAtom(groupsAtom);
 	const [ _pendingGroups, setPendingGroups ] = useAtom(pendingGroupsAtom);
+	const [ currentRoute, _setCurrentRoute ] = useAtom(currentRouteAtom);
+	const [ userData, _setUserData ] = useAtom(userDataAtom);
+	const [ _groups, setGroups ] = useAtom(groupsAtom);
+	const [ token, _setToken ] = useAtom(tokenAtom);
+	const [ jobs, setJobs ] = useAtom(jobsAtom);
 
 	// Other Variables
 	const now = new Date();;
-	const month = 2; //now.getUTCMonth() + 1;
+	const month = now.getUTCMonth() + 1;
 	const year = now.getUTCFullYear();
 	const win = Dimensions.get('window');
 

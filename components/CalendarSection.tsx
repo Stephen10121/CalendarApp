@@ -12,14 +12,16 @@ import { useAtom } from 'jotai';
 import BigDate from './BigDate';
 
 export default function CalendarSection() {
+    const now = new Date();
+
     const [ daysInMonth, setDaysInMonth ] = useState<number | null>(null);
     const [ dateArray, setDateArray ] = useState<DateArray>([]);
     const [ monthJobs, setMonthJobs ] = useState<JobType[]>([]);
     const [ jobForDay, setJobForDay ] = useState<JobType[]>([]);
+    const [ month, setMonth ] = useState(now.getUTCMonth() + 1);
+    const [ year, setYear ] = useState(now.getUTCFullYear());
     const [ onlyMyJobs, setOnlyMyJobs ] = useState(false);
     const [ showBig, setShowBig ] = useState(false);
-    const [ year, setYear ] = useState(2023);
-    const [ month, setMonth ] = useState(2);
     const [ day, setDay ] = useState(1);
 
     const [ _slideUpBorderColor, setSlideUpBorderColor ] = useAtom(slideUpBorderColorAtom);
