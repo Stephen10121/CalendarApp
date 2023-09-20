@@ -30,7 +30,8 @@
     "expo-web-browser": "~12.3.2",
     "expo-auth-session": "~5.0.2",
     "expo-crypto": "~12.4.1",
-    "expo-checkbox": "~2.4.0"
+    "expo-checkbox": "~2.4.0",
+    "@react-native-picker/picker": "2.4.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

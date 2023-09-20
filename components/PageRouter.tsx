@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useAtom } from "jotai";
 import React from "react";
 import GroupSection from "./GroupSection";
+import AddJobSection from "./AddJobSection";
 
 export type RemoveGroup = (groupId: string) => void;
 export type RemovePendingGroup = (pendingGroupId: string) => void;
@@ -123,7 +124,7 @@ export default function LoggedIn() {
 				<GroupSection />
 			</View>
 			<View style={styles.sectionJob}>
-				{/* <AddJobSection /> */}
+				<AddJobSection />
 			</View>
 		</>
 	);
