@@ -135,7 +135,7 @@ export default function JobInfo({ id, baseInfo, myJob, changeBorder }: { id: num
                         <Text style={styles.li}>• Group: <Text style={styles.span}>{info.groupName}</Text></Text>
                         <Text style={styles.li}>• Issued By: <Text style={styles.span}>{info.issuerName}</Text></Text>
                         <Text style={styles.li}>• Client: <Text style={styles.span}>{info.client.length > 0 ? info.client : "Client not given."}</Text></Text>
-                        <Text style={styles.li}>• Address: <Text style={styles.span}>{info.address.length > 0 ? info.address : "Address not given."}</Text></Text>
+                        <Text style={styles.li}>• Address: <Text selectable style={styles.span}>{info.address.length > 0 ? info.address : "Address not given."}</Text></Text>
                         <Text style={styles.li}>• Volunteer{volunteerPositions.length > 1 ? "s" : null}: {volunteerPositions.length!==0 ? null: <Text style={styles.span}>No Volunteers</Text>}</Text>
                         {volunteerPositions.length!==0 ?
                             <View style={styles.volunteerList}>

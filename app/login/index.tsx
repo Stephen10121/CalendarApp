@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableOpacity, Image, ActivityIndicator, Linking } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { ANDROID_CLIENT_ID, EXPO_CLIENT_ID, WEB_CLIENT_ID } from '../../functions/variables';
 import { googleLoginOrRegister } from '../../functions/googleLogin';
 import * as Google from "expo-auth-session/providers/google";

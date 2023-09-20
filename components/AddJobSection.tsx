@@ -64,57 +64,52 @@ export default function AddJobSection() {
             return;
         }
         if (results.message) {
-            setError({ show: true, type: "success", message: results.message});
+        setError({ show: true, type: "success", message: results.message});
         }
-
         if (results.return) {
-            const job2 = results.return;
-            queryClient.invalidateQueries({ queryKey: [`initialJobsFetch`] });
-            queryClient.invalidateQueries({ queryKey: [`jobFetch${job2.month}${job2.year}`] });
+        const job2 = results.return;
+        queryClient.invalidateQueries({ queryKey: [`initialJobsFetch`] });
+        queryClient.invalidateQueries({ queryKey: [`jobFetch${job2.month}${job2.year}`] });
         }
     }
 
-    function Form() {
-        return(
-            <View style={styles.home}>
-                <View style={styles.greeting}>
-                    <Text style={styles.welcome}>Add Job</Text>
-                </View>
-                <View style={styles.form}>
-                    <DropDown values={validGroups} change={setGroup} placeHolder=" Group"/>
-                    <Input height={50} change={setClient} placeHolder=" Client (leave empty if no client)" marginTop={20}/>
-                    <Input height={50} change={setJob} placeHolder=" Job" marginTop={20}/>
-                    <Input height={50} change={setAddress} placeHolder=" Address (leave empty if no address)" marginTop={20}/>
-                    <View style={styles.dateSection}>
-                        <DropDown values={months} change={setMonth} placeHolder=" Month" width={width}/>
-                        <DropDown values={days} change={setDay} placeHolder=" Day" marginLeft={16} width={width}/>
-                        <DropDown values={years} change={setYear} placeHolder=" Year" marginLeft={16} width={width}/>
-                    </View>
-                    <View style={styles.dateSection}>
-                        <DropDown values={hours} change={setHour} placeHolder=" Hour" width={width}/>
-                        <DropDown values={minutes} change={setMinute} placeHolder=" Minute" marginLeft={16} width={width}/>
-                        <DropDown values={[{value: false, label: "AM"},{value: true, label: "PM"}]} change={setPM} placeHolder=" AM/PM" marginLeft={16} width={width}/>
-                    </View>
-                    <Input change={setInstructions} placeHolder="Instructions" marginTop={20} multiLine={true}/>
-                    <View>
-                        <Counter value={positions} minLimit={1} change={setPositions} title="Positions"/>
-                    </View>
-                    <View style={styles.checkboxPart}>
-                        <Text style={styles.checkboxText}>Send a notification</Text>
-                        <Checkbox style={styles.checkbox} value={notification} onValueChange={setNotification} />
-                    </View>
-                    <TouchableOpacity style={styles.send} onPress={sendJob}>
-                        <Text style={styles.sendText}>Create Job</Text>
-                    </TouchableOpacity>
-                </View>
+    const form = <View style={styles.home}>
+        <View style={styles.greeting}>
+            <Text style={styles.welcome}>Add Job</Text>
+        </View>
+        <View style={styles.form}>
+            <DropDown values={validGroups} change={setGroup} placeHolder=" Group"/>
+            <Input height={50} change={setClient} placeHolder=" Client (leave empty if no client)" marginTop={20}/>
+            <Input height={50} change={setJob} placeHolder=" Job" marginTop={20}/>
+            <Input height={50} change={setAddress} placeHolder=" Address (leave empty if no address)" marginTop={20}/>
+            <View style={styles.dateSection}>
+                <DropDown values={months} change={setMonth} placeHolder=" Month" width={width}/>
+                <DropDown values={days} change={setDay} placeHolder=" Day" marginLeft={16} width={width}/>
+                <DropDown values={years} change={setYear} placeHolder=" Year" marginLeft={16} width={width}/>
             </View>
-        );
-    }
-
+            <View style={styles.dateSection}>
+                <DropDown values={hours} change={setHour} placeHolder=" Hour" width={width}/>
+                <DropDown values={minutes} change={setMinute} placeHolder=" Minute" marginLeft={16} width={width}/>
+                <DropDown values={[{value: false, label: "AM"},{value: true, label: "PM"}]} change={setPM} placeHolder=" AM/PM" marginLeft={16} width={width}/>
+            </View>
+            <Input change={setInstructions} placeHolder="Instructions" marginTop={20} multiLine={true}/>
+            <View>
+                <Counter value={positions} minLimit={1} change={setPositions} title="Positions"/>
+            </View>
+            <View style={styles.checkboxPart}>
+                <Text style={styles.checkboxText}>Send a notification</Text>
+                <Checkbox style={styles.checkbox} value={notification} onValueChange={setNotification} />
+            </View>
+            <TouchableOpacity style={styles.send} onPress={sendJob}>
+                <Text style={styles.sendText}>Create Job</Text>
+            </TouchableOpacity>
+        </View>
+    </View>
+    
     if (Platform.OS === "web") {
         return (
             <ScrollView style={styles.webView}>
-                <Form />
+                {form}
             </ScrollView>
         );
     }
@@ -123,7 +118,7 @@ export default function AddJobSection() {
         <KeyboardAvoidingView behavior="padding">
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <ScrollView>
-                    <Form />
+                    {form}
                 </ScrollView>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
