@@ -137,18 +137,20 @@ export default function JobInfo({ id, baseInfo, myJob, changeBorder }: { id: num
                         <Text style={styles.li}>• Client: <Text style={styles.span}>{info.client.length > 0 ? info.client : "Client not given."}</Text></Text>
                         <Text style={styles.li}>• Address: <Text style={styles.span}>{info.address.length > 0 ? info.address : "Address not given."}</Text></Text>
                         <Text style={styles.li}>• Volunteer{volunteerPositions.length > 1 ? "s" : null}: {volunteerPositions.length!==0 ? null: <Text style={styles.span}>No Volunteers</Text>}</Text>
-                        {volunteerPositions.length!==0 ? <View style={styles.volunteerList}>
-                            {volunteerPositions.map((volunteer2) => <View style={{...styles.volunteerListItem, width: "110%"}} key={`volunteerlist${volunteer2.userId}`}>
-                            <Text style={styles.span}>{volunteer2.fullName}</Text>
-                            <View style={styles.editPositionsView}>
-                            {editPositions ? <EditPosition close={() => setEditPositions(false)}/> : volunteer2.userId === userData!.ID ?
-                            <TouchableOpacity style={styles.positionsBox} onPress={() => setEditPositions(true)}>
-                                <Text style={styles.positionsBox2}>{volunteer2.positions} Position{volunteer2.positions > 1 ? "s" : ""}</Text>
-                            </TouchableOpacity>
-                            : <Text style={styles.positionsBox2}>{volunteer2.positions} Position{volunteer2.positions > 1 ? "s" : ""}</Text>}
+                        {volunteerPositions.length!==0 ?
+                            <View style={styles.volunteerList}>
+                                {volunteerPositions.map((volunteer2) => <View style={{...styles.volunteerListItem, width: "100%"}} key={`volunteerlist${volunteer2.userId}`}>
+                                    <Text numberOfLines={1} style={[styles.span, {flex: 1}]}>{volunteer2.fullName}</Text>
+                                    <View style={styles.editPositionsView}>
+                                    {editPositions ? <EditPosition close={() => setEditPositions(false)}/> : volunteer2.userId === userData!.ID ?
+                                    <TouchableOpacity style={styles.positionsBox} onPress={() => setEditPositions(true)}>
+                                        <Text style={styles.positionsBox2}>{volunteer2.positions} Position{volunteer2.positions > 1 ? "s" : ""}</Text>
+                                    </TouchableOpacity>
+                                    : <Text style={styles.positionsBox2}>{volunteer2.positions} Position{volunteer2.positions > 1 ? "s" : ""}</Text>}
+                                    </View>
+                                </View>)}
                             </View>
-                        </View>)}
-                        </View>: null}
+                        : null}
                         <Text style={styles.li}>• Time: <Text style={styles.span}>{info.hour}:{info.minute}{info.pm ? "PM":"AM"}</Text></Text>
                         <Text style={styles.li}>• Date: <Text style={styles.span}>{dateString}</Text></Text>
                         <Text style={styles.li}>• Job: <Text style={styles.span}>{info.jobTitle}</Text></Text>

@@ -1,6 +1,7 @@
-import { closeInternalAtom, errorAtom, globalLoadingAtom, slideUpAtom, slideUpBorderColorAtom, tokenAtom, userDataAtom } from "../store";
+import { closeInternalAtom, errorAtom, globalLoadingAtom, loadingPopupAtom, slideUpAtom, slideUpBorderColorAtom, tokenAtom, userDataAtom } from "../store";
 import { View, StyleSheet, Dimensions, ActivityIndicator } from "react-native";
 import { validateUser } from "../functions/validateUser";
+import LoadingIcon from "../components/LoadingIcon";
 import PageRouter from "../components/PageRouter";
 import Navigator from "../components/Navigator";
 import SlideUp from "../components/SlideUp";
@@ -12,6 +13,7 @@ import { useAtom } from "jotai";
 export default function Page() {
 	const [ slideUpBorderColor, _setSlideUpBorderColor ] = useAtom(slideUpBorderColorAtom);
 	const [ closeInternal, setCloseInternal ] = useAtom(closeInternalAtom);
+	const [ loadingPopup, _setLoadingPopup ] = useAtom(loadingPopupAtom);
 	const [ showSlideUp, setShowSlideUp ] = useAtom(slideUpAtom);
     const [ loading, setLoading ] = useAtom(globalLoadingAtom);
 	const [ userData, setUserData ] = useAtom(userDataAtom);
@@ -58,7 +60,8 @@ export default function Page() {
 		  width: "100%",
 		  display: 'flex',
 		  flexDirection: "row",
-		  overflow: "hidden"
+		  overflow: "hidden",
+		  backgroundColor: "#dfdfdf",
 		}
 	});
 
@@ -76,5 +79,6 @@ export default function Page() {
 				: null}
             </View>
             <Navigator profilePic={userData?.picture} />
+			{!!loadingPopup ? <LoadingIcon>{loadingPopup}</LoadingIcon> : null}
 		</> : <View style={styles.loading}><ActivityIndicator size="large" color="#3A9FE9" /></View>;
 }

@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import React from "react";
+import CalendarSection from "./CalendarSection";
 
 export type RemoveGroup = (groupId: string) => void;
 export type RemovePendingGroup = (pendingGroupId: string) => void;
@@ -115,7 +116,7 @@ export default function LoggedIn() {
 				<HomeSection name={userData!.name} />
 			</View>
 			<View style={styles.sectionCal}>
-				{/* <CalendarSection setShowSlideUp={setShowSlideUp} setSlideUpBorderColor={setSlideUpBorderColor} setCloseInternal={setCloseInternal} /> */}
+				<CalendarSection />
 			</View>
 			<View style={styles.sectionGroup}>
 				{/* <GroupSection /> */}
