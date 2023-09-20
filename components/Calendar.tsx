@@ -17,6 +17,8 @@ export default function Calendar({ myJobShow, myJobToggle, monthIndex, month, ye
     const [ myDates, setMyDates ] = useState(false);
     
     const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
+    const newHeight = (windowHeight - 260) / (dateArray.length===42 ? 6 : 5);
 
     function myDateFilter(job: JobType) {
         if (!myDates) return true;
@@ -50,7 +52,7 @@ export default function Calendar({ myJobShow, myJobToggle, monthIndex, month, ye
     return (
         <View style={styles.calendar}>
             <SliderToggle option2Selected={myJobShow} width={150} height={35} selected={(data) => {myJobToggle(data===1);setMyDates(data===1)}} option1="All dates" option2='My dates'/>
-            <View style={{width: "100%", marginTop: 25, marginBottom: 10}}>
+            <View style={{width: "100%", height: windowHeight - 190, marginTop: 25, marginBottom: 10}}>
                 <View style={styles.calendarHeader}>
                     <TouchableOpacity style={styles.clicker} onPress={()=>changeMonth("right")}>
                             <Image style={styles.leftClick}
@@ -73,33 +75,33 @@ export default function Calendar({ myJobShow, myJobToggle, monthIndex, month, ye
                         </View>)}
                 </View>
                 {dateArray.length===42 || dateArray.length===35 ? <>
-                    <View style={styles.calendarRow}>
+                    <View style={[styles.calendarRow, {height: newHeight}]}>
                         {dateArray.slice(0,7).map((val) => {
                             return <CalendarTile gray={val.month!==monthIndex} key={`calendartile${val.day}m${val.month}`} number={val.day} tiles={newMonthJobs.filter((job) => job.day === val.day && job.month === val.month).map(setType)} clicked={() => clicked(val.day)} />
                         })}
                     </View>
-                    <View style={styles.calendarRow}>
+                    <View style={[styles.calendarRow, {height: newHeight}]}>
                         {dateArray.slice(7,15).map((val) => {
                             return <CalendarTile gray={val.month!==monthIndex} key={`calendartile${val.day}m${val.month}`} number={val.day} tiles={newMonthJobs.filter((job) => job.day === val.day && job.month === val.month).map(setType)} clicked={() => clicked(val.day)} />
                         })}
                     </View>
-                    <View style={styles.calendarRow}>
+                    <View style={[styles.calendarRow, {height: newHeight}]}>
                         {dateArray.slice(14,22).map((val) => {
                             return <CalendarTile gray={val.month!==monthIndex} key={`calendartile${val.day}m${val.month}`} number={val.day} tiles={newMonthJobs.filter((job) => job.day === val.day && job.month === val.month).map(setType)} clicked={() => clicked(val.day)} />
                         })}
                     </View>
-                    <View style={styles.calendarRow}>
+                    <View style={[styles.calendarRow, {height: newHeight}]}>
                         {dateArray.slice(21,29).map((val) => {
                             return <CalendarTile gray={val.month!==monthIndex} key={`calendartile${val.day}m${val.month}`} number={val.day} tiles={newMonthJobs.filter((job) => job.day === val.day && job.month === val.month).map(setType)} clicked={() => clicked(val.day)} />
                         })}
                     </View>
-                    <View style={styles.calendarRow}>
+                    <View style={[styles.calendarRow, {height: newHeight}]}>
                         {dateArray.slice(28,35).map((val) => {
                             return <CalendarTile gray={val.month!==monthIndex} key={`calendartile${val.day}m${val.month}`} number={val.day} tiles={newMonthJobs.filter((job) => job.day === val.day && job.month === val.month).map(setType)} clicked={() => clicked(val.day)} />
                         })}
                     </View>
                     {dateArray.length===42 ? 
-                        <View style={styles.calendarRow}>
+                        <View style={[styles.calendarRow, {height: newHeight}]}>
                             {dateArray.slice(35,42).map((val) => {
                             return <CalendarTile gray={val.month!==monthIndex} key={`calendartile${val.day}m${val.month}`} number={val.day} tiles={newMonthJobs.filter((job) => job.day === val.day && job.month === val.month).map(setType)} clicked={() => clicked(val.day)} />
                         })}

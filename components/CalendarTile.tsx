@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
     clickableTile: {
         width: "100%",
-        minHeight: 65,
+        height: "100%",
         position: "relative"
     },
     date: {

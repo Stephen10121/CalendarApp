@@ -23,7 +23,7 @@ export default function LoggedIn() {
 	const [ jobs, setJobs ] = useAtom(jobsAtom);
 
 	// Other Variables
-	const now = new Date();;
+	const now = new Date();
 	const month = now.getUTCMonth() + 1;
 	const year = now.getUTCFullYear();
 	const win = Dimensions.get('window');
