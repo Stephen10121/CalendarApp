@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
 import { errorAtom } from "../store";
 import { useAtom } from "jotai";
 import React from "react";
@@ -7,11 +7,12 @@ export type MessageType = "alert" | "default" | "success";
 
 export default function PopDown({ message, type }: { message: string, type?: MessageType }) {
     const [ _error, setError ] = useAtom(errorAtom);
+    const width = Dimensions.get('window').width;
 
     const styles = StyleSheet.create({
         cover: {
             position: "relative",
-            zIndex: 200
+            zIndex: 200,
         },
         box: {
             width: "100%",
@@ -22,7 +23,8 @@ export default function PopDown({ message, type }: { message: string, type?: Mes
             left: 0
         },
         innerBox: {
-            width: "100%",
+            width: width - 20,
+            marginLeft: 5,
             backgroundColor: type === "alert" ? "#EE3F3F" : type === "success" ? "#1cfc03" : "#3A9FE9",
             borderRadius: 2,
             padding: 5,
@@ -36,7 +38,8 @@ export default function PopDown({ message, type }: { message: string, type?: Mes
             fontWeight: "700",
             fontFamily: "Poppins-SemiBold",
             letterSpacing: 1,
-            marginHorizontal: 10
+            marginHorizontal: 10,
+            flex: 1
         },
         closeButton: {
             width: 30,
