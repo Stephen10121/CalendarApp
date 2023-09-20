@@ -61,7 +61,7 @@ export default function Page() {
 		  display: 'flex',
 		  flexDirection: "row",
 		  overflow: "hidden",
-		  backgroundColor: "#dfdfdf",
+		  backgroundColor: "#dfdfdf"
 		}
 	});
 

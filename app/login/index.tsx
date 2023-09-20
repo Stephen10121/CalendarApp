@@ -2,17 +2,20 @@ import { StyleSheet, View, Text, TouchableOpacity, Image, ActivityIndicator } fr
 import { ANDROID_CLIENT_ID, EXPO_CLIENT_ID, WEB_CLIENT_ID } from '../../functions/variables';
 import { googleLoginOrRegister } from '../../functions/googleLogin';
 import * as Google from "expo-auth-session/providers/google";
+import PopDownLogin from '../../components/PopDownLogin';
 import { storeData } from '../../functions/storeData';
 import React, { useEffect, useState } from 'react';
 import * as WebBrowser from 'expo-web-browser';
+import { errorAtom } from '../../store';
 import { useRouter } from 'expo-router';
+import { useAtom } from 'jotai';
 
 WebBrowser.maybeCompleteAuthSession();
 
 export default function Login() {
     const router = useRouter();
     const [ loading, setLoading ] = useState(false);
-    const [ error, setError ] = useState("");
+    const [ error, setError ] = useAtom(errorAtom);
     const [request, response, googlePromptAsync] = Google.useAuthRequest({
         expoClientId: EXPO_CLIENT_ID,
         iosClientId: "",
@@ -24,7 +27,7 @@ export default function Login() {
         if (!response) return false;
 
         if (response.type !== "success") {
-            setError("Error Using Google Login");
+            setError({ message: "Error Using Google Login", show: true, type: "alert"});
             return false;
         }
 
@@ -34,13 +37,13 @@ export default function Login() {
         const res2 = await googleLoginOrRegister(access_token);
 
         if (res2.error) {
-            setError(res2.errorMessage);
+            setError({ message: res2.errorMessage, show: true, type: "alert"});
             setLoading(false);
             return false;
         }
 
         if (!res2.data) {
-            setError("Error using Google Login");
+            setError({ message: "Error Using Google Login", show: true, type: "alert"});
             setLoading(false);
             return false;
         }
@@ -62,16 +65,18 @@ export default function Login() {
     }
 
     return (
-        <View style={styles.main}>
-            <Text style={styles.welcome}>Welcome</Text>
-            {error ? <Text style={styles.error}>{error}</Text> : null}
-            <TouchableOpacity disabled={!request} style={styles.googleButton} onPress={async () => await googlePromptAsync()}>
-                <Image style={styles.image}
-                source={require('../../assets/google.png')}
-                />
-                <Text style={styles.text}>Login With Google</Text>
-            </TouchableOpacity>
-        </View>
+        <>
+            {error.show ? <PopDownLogin message={error.message} type={error.type}/>: null}
+            <View style={styles.main}>
+                <Text style={styles.welcome}>Welcome</Text>
+                <TouchableOpacity disabled={!request} style={styles.googleButton} onPress={async () => await googlePromptAsync()}>
+                    <Image style={styles.image}
+                    source={require('../../assets/google.png')}
+                    />
+                    <Text style={styles.text}>Login With Google</Text>
+                </TouchableOpacity>
+            </View>
+        </>
     );
 }
 
@@ -117,12 +122,5 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         width: "100%",
         height: "100%"
-    },
-    error: {
-        marginLeft: 25,
-        fontSize: 14,
-        fontWeight: "700",
-        color: "red",
-        fontFamily: "Poppins-SemiBold"
     }
 });
