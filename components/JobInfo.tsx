@@ -11,6 +11,7 @@ import EditPosition from "./EditPosition";
 import { Border } from "./SlideUp";
 import { useAtom } from "jotai";
 import Counter from "./Counter";
+import JobChat from "./JobChat";
 import React from "react";
 
 export interface VolunteerType {
@@ -127,7 +128,7 @@ export default function JobInfo({ id, baseInfo, myJob, changeBorder }: { id: num
             <View style={styles.toggleSection}>
                 <SliderToggle width={150} height={35} selected={(a) => setComments(a===1)}/>
             </View>
-            {comments ? null :
+            {comments ? <JobChat /> :
                 <View>
                     {info !== undefined ?
                     <>
