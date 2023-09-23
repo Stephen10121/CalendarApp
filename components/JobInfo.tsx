@@ -143,7 +143,7 @@ export default function JobInfo({ id, baseInfo, myJob, changeBorder }: { id: num
                                 {volunteerPositions.map((volunteer2) => <View style={{...styles.volunteerListItem, width: "100%"}} key={`volunteerlist${volunteer2.userId}`}>
                                     <Text numberOfLines={1} style={[styles.span, {flex: 1}]}>{volunteer2.fullName}</Text>
                                     <View style={styles.editPositionsView}>
-                                    {editPositions ? <EditPosition close={() => setEditPositions(false)}/> : volunteer2.userId === userData!.ID ?
+                                    {editPositions && volunteer2.userId===userData?.ID ? <EditPosition close={() => setEditPositions(false)}/> : volunteer2.userId === userData!.ID ?
                                     <TouchableOpacity style={styles.positionsBox} onPress={() => setEditPositions(true)}>
                                         <Text style={styles.positionsBox2}>{volunteer2.positions} Position{volunteer2.positions > 1 ? "s" : ""}</Text>
                                     </TouchableOpacity>
