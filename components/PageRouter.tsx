@@ -4,13 +4,13 @@ import { FetchGroupsResponse, fetchGroups } from "../functions/fetchGroups";
 import { Dimensions, StyleSheet, View } from "react-native";
 import addJobMonth from "../functions/addJobMonth";
 import CalendarSection from "./CalendarSection";
+import AddJobSection from "./AddJobSection";
+import GroupSection from "./GroupSection";
 import HomeSection from "./HomeSection";
 import { useQuery } from "react-query";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import React from "react";
-import GroupSection from "./GroupSection";
-import AddJobSection from "./AddJobSection";
 
 export type RemoveGroup = (groupId: string) => void;
 export type RemovePendingGroup = (pendingGroupId: string) => void;

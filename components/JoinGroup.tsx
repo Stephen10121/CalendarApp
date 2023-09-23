@@ -33,20 +33,18 @@ export default function JoinGroup({ close }: { close: () => any }) {
         close();
     }
 
-    function Inputs() {
-        return (
-            <View style={styles.nonScroll}>
-                <Input change={setGroupId} placeHolder="Group ID"/>
-                <Input change={setGroupPassword} placeHolder="Group Password" marginTop={25}/>
-                <TouchableOpacity style={styles.acceptButton} onPress={joinGroupButton}><Text style={styles.acceptButtonText}>Join Group</Text></TouchableOpacity>
-            </View>
-        );
-    }
+    const inputs = (
+        <View style={styles.nonScroll}>
+            <Input change={setGroupId} placeHolder="Group ID"/>
+            <Input change={setGroupPassword} placeHolder="Group Password" marginTop={25}/>
+            <TouchableOpacity style={styles.acceptButton} onPress={joinGroupButton}><Text style={styles.acceptButtonText}>Join Group</Text></TouchableOpacity>
+        </View>
+    );
 
     if (Platform.OS === "web") {
         return(
             <View style={styles.joinGroup}>
-                <Inputs />
+                {inputs}
             </View>
         );
     }
@@ -54,7 +52,7 @@ export default function JoinGroup({ close }: { close: () => any }) {
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.joinGroup}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <Inputs />
+                {inputs}
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
     );

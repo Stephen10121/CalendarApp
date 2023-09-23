@@ -5,8 +5,11 @@ import { io } from "socket.io-client";
 
 export default function JobChat() {
     useEffect(() => {
-        const socket = io("http://localhost:8000");
-        socket.on("seq-num", (msg) => console.info(msg));
+        const socket = io("https://calsocket.stephengruzin.dev");
+        socket.on("seq-num", (msg: string) => console.info(msg));
+        return () => {
+          socket.disconnect();
+        }
     }, []);
   return (
     <View>

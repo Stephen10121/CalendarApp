@@ -12,9 +12,8 @@ import { useAtom } from "jotai";
 
 export default function Page() {
 	const [ slideUpBorderColor, _setSlideUpBorderColor ] = useAtom(slideUpBorderColorAtom);
-	const [ closeInternal, setCloseInternal ] = useAtom(closeInternalAtom);
 	const [ loadingPopup, _setLoadingPopup ] = useAtom(loadingPopupAtom);
-	const [ showSlideUp, setShowSlideUp ] = useAtom(slideUpAtom);
+	const [ showSlideUp, _setShowSlideUp ] = useAtom(slideUpAtom);
     const [ loading, setLoading ] = useAtom(globalLoadingAtom);
 	const [ userData, setUserData ] = useAtom(userDataAtom);
 	const [ error, _setError ] = useAtom(errorAtom);
@@ -72,11 +71,9 @@ export default function Page() {
             <View style={styles.body}>
 				{error.show ? <PopDown message={error.message} type={error.type}/>: null}
 				<PageRouter />
-				{showSlideUp.show ? 
-					<SlideUp fullHeight={true} closeInternal={closeInternal} border={slideUpBorderColor} close={() => {setShowSlideUp({...showSlideUp, show: false}),setCloseInternal(false)}} header={showSlideUp.header}>
+				<SlideUp fullHeight={true} show={showSlideUp.show} border={slideUpBorderColor} header={showSlideUp.header}>
 					{showSlideUp.children}
-					</SlideUp>
-				: null}
+				</SlideUp>
             </View>
             <Navigator profilePic={userData?.picture} />
 			{!!loadingPopup ? <LoadingIcon>{loadingPopup}</LoadingIcon> : null}

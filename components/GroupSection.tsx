@@ -14,14 +14,17 @@ export default function GroupSection() {
     const [ pendingGroups, _setPendingGroups ] = useAtom(pendingGroupsAtom);
     const [ clickGroup, setClickGroup ] = useAtom(clickGroupAtom);
     const [ _showSlideUp, setShowSlideUp ] = useAtom(slideUpAtom);
-    const [ _closeInternal, setCloseInternal] = useState(false);
 	const [ groups, _setGroups ] = useAtom(groupsAtom);
+
+    function closeSlideUp() {
+        setShowSlideUp((prev) => {return{...prev, show: false}})
+    }
 
     useEffect(() => {
         if (clickGroup) {
             for (let i=0;i<groups.length;i++) {
                 if (groups[i].groupId === clickGroup) {
-                    setShowSlideUp({ show: true, header: groups[i].groupName, children: <GroupInfo close={() => setCloseInternal(true)} groupId={groups[i].groupId} othersCanAdd={groups[i].othersCanAdd}/> });
+                    setShowSlideUp({ show: true, header: groups[i].groupName, children: <GroupInfo close={closeSlideUp} groupId={groups[i].groupId} othersCanAdd={groups[i].othersCanAdd}/> });
                     setSlideUpBorderColor("black");
                 }
             }
@@ -30,22 +33,22 @@ export default function GroupSection() {
     }, [clickGroup]);
 
     function groupClicked(groupId: string, name: string, othersCanAdd: boolean) {
-        setShowSlideUp({ show: true, header: name, children: <GroupInfo close={() => setCloseInternal(true)} groupId={groupId} othersCanAdd={othersCanAdd}/> });
+        setShowSlideUp({ show: true, header: name, children: <GroupInfo close={closeSlideUp} groupId={groupId} othersCanAdd={othersCanAdd}/> });
         setSlideUpBorderColor("black");
     }
 
     function pendingGroupClicked(groupId: string, name: string, _othersCanAdd: boolean) {
-        setShowSlideUp({ show: true, header: name, children: <PendingGroupInfo close={() => setCloseInternal(true)} name={name} groupId={groupId} /> });
+        setShowSlideUp({ show: true, header: name, children: <PendingGroupInfo close={closeSlideUp} name={name} groupId={groupId} /> });
         setSlideUpBorderColor("black");
     }
 
     function joinGroupClicked() {
-        setShowSlideUp({ show: true, header: "Join Group", children: <JoinGroup close={() => setCloseInternal(true)} /> });
+        setShowSlideUp({ show: true, header: "Join Group", children: <JoinGroup close={closeSlideUp} /> });
         setSlideUpBorderColor("blue");
     }
 
     function createGroupClicked() {
-        setShowSlideUp({ show: true, header: "Create Group", children: <CreateGroup close={() => setCloseInternal(true)} /> });
+        setShowSlideUp({ show: true, header: "Create Group", children: <CreateGroup close={closeSlideUp} /> });
         setSlideUpBorderColor("red");
     }
 

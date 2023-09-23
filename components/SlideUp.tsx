@@ -1,5 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, Dimensions, Animated, Easing, Platform } from "react-native";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useAtom } from "jotai";
+import { slideUpAtom } from "../store";
 
 export type Border = "black" | "red" | "blue" | "yellow";
 
@@ -9,7 +11,9 @@ export interface SlideUpData {
     children: any;
 }
 
-export default function SlideUp({ header, children, close, border, closeInternal, fullHeight }: { header: string, children: any, close: () => void, border: Border, closeInternal: boolean, fullHeight?: boolean}) {
+export default function SlideUp({ header, children, show, border, fullHeight }: { header: string, children: any, show: boolean, border: Border, fullHeight?: boolean}) {
+    const [ _showSlideUp, setShowSlideUp ] = useAtom(slideUpAtom);
+    const [ showChildren, setShowChildren ] = useState(false);
     const win = Dimensions.get('window');
     const fadeAnim = useRef(new Animated.Value(70)).current;
 
@@ -23,16 +27,17 @@ export default function SlideUp({ header, children, close, border, closeInternal
         }).start();
     }
 
-    useEffect(() => changeTiming(-win.height+90), []);
-
     useEffect(() => {
-        if (closeInternal) closeIt();
-    }, [closeInternal]);
-
-    function closeIt() {
-        changeTiming(70);
-        setTimeout(close, 300);
-    }
+        if (show) {
+            setShowChildren(true);
+            changeTiming(-win.height+90);
+        } else {
+            changeTiming(70);
+            setTimeout(() => {
+                setShowChildren(false);
+            }, 300);
+        }
+    }, [show]);
 
     return (
         <Animated.View style={[styles.main, {
@@ -43,12 +48,12 @@ export default function SlideUp({ header, children, close, border, closeInternal
         }]}>
             <View style={styles.header}>
                 <Text style={styles.headerTitle} numberOfLines={1}>{header}</Text>
-                <TouchableOpacity style={styles.closeButton} onPress={closeIt}>
+                <TouchableOpacity style={styles.closeButton} onPress={() => setShowSlideUp((prev) => {return{...prev, show: false}})}>
                     <Image style={styles.image} source={require('../assets/closecircle.png')} />
                 </TouchableOpacity>
             </View>
             <View style={[styles.main2, {height: win.height - (fullHeight ? 70 : 140)}]}>
-                {children}
+                {showChildren ? children : null}
             </View>
         </Animated.View>
     );
