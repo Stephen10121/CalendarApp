@@ -25,7 +25,6 @@ export default function CalendarSection() {
     const [ day, setDay ] = useState(1);
 
     const [ _slideUpBorderColor, setSlideUpBorderColor ] = useAtom(slideUpBorderColorAtom);
-	const [ _closeInternal, setCloseInternal ] = useAtom(closeInternalAtom);
     const [ _loadingPopup, setLoadingPopup ] = useAtom(loadingPopupAtom);
     const [ _showSlideUp, setShowSlideUp ] = useAtom(slideUpAtom);
 	const [ userData, _setUserData ] = useAtom(userDataAtom);
@@ -125,7 +124,7 @@ export default function CalendarSection() {
             color = "blue";
 		}
         setSlideUpBorderColor(color);
-        setShowSlideUp({ show: true, header: job.jobTitle, children: <JobInfo changeBorder={borderChange} id={job.ID} myJob={myJob} close={() => setCloseInternal(true)} baseInfo={job}/> });
+        setShowSlideUp({ show: true, header: job.jobTitle, children: <JobInfo changeBorder={borderChange} id={job.ID} myJob={myJob} close={() => setShowSlideUp((prev) => {return {...prev, show:false}})} baseInfo={job}/> });
     }
 
     function borderChange(color: Border) {setSlideUpBorderColor(color)}

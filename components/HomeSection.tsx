@@ -19,17 +19,21 @@ export default function HomeSection({ name }: { name: string }) {
     useEffect(() => {
         console.log("Checking if job selected.")
         if (jobSelected) {
-            setShowSlideUp({ show: true, header: jobSelected.title, children: <JobInfo changeBorder={borderChange} id={jobSelected.id} myJob={false} close={() => setCloseInternal(true)}/>});
+            setShowSlideUp({ show: true, header: jobSelected.title, children: <JobInfo changeBorder={borderChange} id={jobSelected.id} myJob={false} close={closeSlideUp}/>});
             setSlideUpBorderColor("blue");
         }
     }, [jobSelected]);
+
+    function closeSlideUp() {
+        setShowSlideUp((prev) => {return{...prev, show: false}})
+    }
 
     function borderChange(color: Border) {
         setSlideUpBorderColor(color);
     }
 
     function jobClicked(job: JobType, myJob?: boolean) {
-        setShowSlideUp({ show: true, header: job.jobTitle, children: <JobInfo changeBorder={borderChange} id={job.ID} myJob={myJob} close={() => setCloseInternal(true)} baseInfo={job}/> });
+        setShowSlideUp({ show: true, header: job.jobTitle, children: <JobInfo changeBorder={borderChange} id={job.ID} myJob={myJob} close={closeSlideUp} baseInfo={job}/> });
         setSlideUpBorderColor(job.taken ? "red" : "blue");
     }
 
