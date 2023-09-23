@@ -1,4 +1,4 @@
-import { closeInternalAtom, errorAtom, globalLoadingAtom, loadingPopupAtom, slideUpAtom, slideUpBorderColorAtom, tokenAtom, userDataAtom } from "../store";
+import { errorAtom, globalLoadingAtom, loadingPopupAtom, slideUpAtom, slideUpBorderColorAtom, tokenAtom, userDataAtom } from "../store";
 import { View, StyleSheet, Dimensions, ActivityIndicator } from "react-native";
 import { validateUser } from "../functions/validateUser";
 import LoadingIcon from "../components/LoadingIcon";

@@ -1,4 +1,4 @@
-import { closeInternalAtom, loadingPopupAtom, slideUpAtom, slideUpBorderColorAtom, tokenAtom, userDataAtom } from '../store';
+import { loadingPopupAtom, slideUpAtom, slideUpBorderColorAtom, tokenAtom, userDataAtom } from '../store';
 import { GetJobsByDateResponse, getJobsByDate } from '../functions/getJobsByDate';
 import { getDaysInAmonth, monthToLetterFull } from '../functions/dateConversion';
 import { JobType } from '../functions/getJobsByDates';
@@ -78,7 +78,7 @@ export default function CalendarSection() {
             setMonthJobs(data.jobs);
             setJobForDay(data.jobs.filter(job => job.day === day));
         }
-      }, [nextMonthJobs.status, nextMonthJobs.data]);
+      }, [nextMonthJobs.status, nextMonthJobs.data, nextMonthJobs.isRefetching]);
 
     useEffect(changeDateArray, [year, month]);
     useEffect(() => setJobForDay(monthJobs.filter(job => job.day === day)), [day]);

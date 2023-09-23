@@ -30,7 +30,7 @@ export async function fetchGroups(token: string): Promise<FetchGroupsResponse> {
         },
         credentials: "omit"
     });
-
+    
     try {
         const groupsJson = await groups.json();
         if (groupsJson.error) return {error: groupsJson.error}

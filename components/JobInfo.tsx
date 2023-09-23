@@ -39,7 +39,7 @@ export default function JobInfo({ id, baseInfo, myJob, changeBorder }: { id: num
     const queryClient = useQueryClient();
 
     // Fetch the job information
-    const { status, data, refetch } = useQuery<JobType, Error>(["jobInfo"], async () => {
+    const { status, data, refetch, isRefetching } = useQuery<JobType, Error>(["jobInfo"], async () => {
         const groups = await fetch(`${POST_SERVER}/jobInfo`, {
             method: "POST",
             headers: {
@@ -121,7 +121,7 @@ export default function JobInfo({ id, baseInfo, myJob, changeBorder }: { id: num
         if (status === "error") {
             setError({ type: "alert", show: true, message: "Cannot Update Job." });
         }
-    }, [status, data]);
+    }, [status, data, isRefetching]);
 
     return(
         <ScrollView style={styles.groupInfo}>

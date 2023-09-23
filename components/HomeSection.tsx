@@ -1,4 +1,4 @@
-import { closeInternalAtom, jobSelectedAtom, jobsAtom, slideUpAtom, slideUpBorderColorAtom, userDataAtom } from '../store';
+import { jobSelectedAtom, jobsAtom, slideUpAtom, slideUpBorderColorAtom, userDataAtom } from '../store';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import RenderAvailableJobs from './RenderAvailableJobs';
 import { JobType } from '../functions/getJobsByDates';
@@ -10,7 +10,6 @@ import JobInfo from './JobInfo';
 
 export default function HomeSection({ name }: { name: string }) {
 	const [ _slideUpBorderColor, setSlideUpBorderColor ] = useAtom(slideUpBorderColorAtom);
-	const [ _closeInternal, setCloseInternal ] = useAtom(closeInternalAtom);
     const [ jobSelected, _setJobSelected ] = useAtom(jobSelectedAtom);
     const [ _showSlideUp, setShowSlideUp ] = useAtom(slideUpAtom);
     const [ userData, _setUserData ] = useAtom(userDataAtom);

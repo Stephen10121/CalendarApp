@@ -43,7 +43,7 @@ export default function LoggedIn() {
 	useEffect(() => {
 		const { data, status } = groupFetch;
 		if (status === "success") setGroupsAndJobs(data);
-	}, [groupFetch.status, groupFetch.data]);
+	}, [groupFetch.status, groupFetch.data, groupFetch.isRefetching]);
 
 	useEffect(() => {
 		const { data, status } = threeMonthJobs;
@@ -65,7 +65,7 @@ export default function LoggedIn() {
 			});
 		}
 		setJobs(newJobsObject);
-	}, [threeMonthJobs.status, threeMonthJobs.data]);
+	}, [threeMonthJobs.status, threeMonthJobs.data, threeMonthJobs.isRefetching]);
 
 	const styles = StyleSheet.create({
 		main: {

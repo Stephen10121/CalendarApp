@@ -21,5 +21,4 @@ export const pendingGroupsAtom = atom<PendingGroupsType[]>([]);
 export const jobSelectedAtom = atom<{id: number, title: string} | null>(null);
 export const slideUpAtom = atom<SlideUpData>({show: false, header: "N/A", children: null});
 export const slideUpBorderColorAtom = atom<Border>("black");
-export const closeInternalAtom = atom(false);
 export const clickGroupAtom = atom<string | null>(null);

@@ -23,7 +23,7 @@ export default function GroupInfo({ groupId, othersCanAdd, close }: { groupId: s
     const [ ownerLeave, setOwnerLeave ] = useState(false);
     const [ delete2, setDelete ] = useState(false);
 
-    const { status, data } = useQuery<GroupInfoResponse, Error>(["groupInfo"], async () => await groupInfo(groupId, token!), {
+    const { status, data, isRefetching } = useQuery<GroupInfoResponse, Error>(["groupInfo"], async () => await groupInfo(groupId, token!), {
         staleTime: 30000,
         refetchInterval: 30000,
         cacheTime: 0
@@ -40,7 +40,7 @@ export default function GroupInfo({ groupId, othersCanAdd, close }: { groupId: s
                 setDate("N/A");
             }
         }
-    }, [status, data]);
+    }, [status, data, isRefetching]);
 
     async function particapantAccept(id: string, name: string) {
         if (!data2) {
